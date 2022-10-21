@@ -1,13 +1,14 @@
 CREATE DATABASE Imobiliaria;
 USE Imobiliaria;
 
-CREATE TABLE Categoria_imovel(
+CREATE TABLE Categoria_imovel( ----ok
 cod_categoria INT PRIMARY KEY, 
 categoria VARCHAR(20) NOT NULL
 );   
 
-CREATE TABLE Imoveis(
+CREATE TABLE Imoveis( ----ok
 cod_imovel INT PRIMARY KEY,
+foto_imovel VARCHAR (10) NOT NULL,
 endereço VARCHAR (30) NOT NULL,
 data_construção DATE NOT NULL, 
 bairro VARCHAR (30) NOT NULL,
@@ -17,40 +18,45 @@ FOREIGN KEY (cod_categoriaFK) REFERENCES Categoria_imovel(cod_categoria)
 );
  
  
- CREATE TABLE Status_imovel(
+ CREATE TABLE Status_imovel( ----ok
  cod_status INT PRIMARY KEY,
  status_imovel VARCHAR(15) NOT NULL,
  cod_imovelFK_statusImovel INT NOT NULL,
  FOREIGN KEY (cod_imovelFK_statusImovel) REFERENCES Imoveis(cod_imovel)
 );
-  
-CREATE TABLE Info_Casa(
+
+
+CREATE TABLE Info_Casa( ------ok
 cod_casa INT PRIMARY KEY,
-qtd_comodos_casa INT NOT NULL,
-qtd_suites_casa INT NOT NULL,
-qtd_garagem_casa INT NOT NULL,
+QTDQuartos INT NOT NULL,
+QTDSuites  INT NOT NULL,
+QTDSala_estar INT NOT NULL,
+QTDSala_jantar INT NOT NULL,
+QTDGaragem INT NOT NULL,
 area_m2 INT NOT NULL,
+armario_embutido VARCHAR(10) NOT NULL,
 descricao VARCHAR(50) NOT NULL,
 cod_imovelFK_casa INT NOT NULL,
 FOREIGN KEY (cod_imovelFK_casa) REFERENCES Imoveis(cod_imovel)
 );
   
-CREATE TABLE Info_AP(
+CREATE TABLE Info_AP( -----ok
 cod_AP INT PRIMARY KEY,
-qtd_comodos_AP INT NOT NULL,
-qtd_suites_AP INT NOT NULL,
-qtd_garagem_AP INT NOT NULL,
-numero_AP INT NOT NULL,
-bloco INT NOT NULL, 
-valor_condomino DECIMAL(8,2) NOT NULL,
-portaria_24_hours VARCHAR(3) NOT NULL,
-area_m2 INT NOT NULL,
+QTDQuartos INT NOT NULL,
+QTDSuites INT NOT NULL,
+QTDSala_estar INT NOT NULL,
+QTDSala_jantar INT NOT NULL,
+QTDGaragem INT NOT NULL,
+armario_embutido VARCHAR (10) NOT NULL,
 descricao VARCHAR(50) NOT NULL,
+andar INT NOT NULL,
+ValorCondominio INT NOT NULL,
+portaria_24h VARCHAR (10),
 cod_imovelFK_ap INT NOT NULL,
 FOREIGN KEY (cod_imovelFK_ap) REFERENCES Imoveis(cod_imovel)
 );
   
-CREATE TABLE Info_Comercial (
+CREATE TABLE Info_Comercial ( ----ok
 cod_comercial INT PRIMARY KEY,
 area_m2 INT NOT NULL,
 qtd_banheiros INT NOT NULL,
@@ -58,9 +64,11 @@ cod_imovelFK_comercial INT NOT NULL,
 FOREIGN KEY (cod_imovelFK_comercial) REFERENCES Imoveis(cod_imovel)
 );
     
-CREATE TABLE Info_terreno (
+CREATE TABLE Info_terreno ( ---ok
 cod_terreno INT PRIMARY KEY,
 area_m2 INT NOT NULL,
+largura INT NOT NULL,
+comprimento INT NOT NULL,
 possui_aclive_declive VARCHAR(3) NOT NULL,
 cod_imovelFK_terreno INT NOT NULL,
 FOREIGN KEY (cod_imovelFK_terreno) REFERENCES Imoveis(cod_imovel)
